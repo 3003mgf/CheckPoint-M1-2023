@@ -34,10 +34,32 @@ OUTPUT -->
                          /                                       \
 {nombre: "300", horario: 6, ticket: true}            {nombre: "Harry potter", horario: 23, ticket: true}
 */
-BinarySearchTree.prototype.ingresar = function (arregloDePeliculas) {
-   // Tu código aquí:
 
-};
+BinarySearchTree.prototype.ingresar = function (arregloDePeliculas, arregloConTutti = []) {
+  // Tu código aquí:
+  if (arregloDePeliculas.length === 0){
+    return false;
+  }
+
+  if (this.left) {
+    arregloConTutti.push(this.left)
+  }
+  if (this.right){
+    arregloConTutti.push(this.right)
+  }
+
+  for (var i= 0; i < arregloDePeliculas.length; i++) {
+    if (arregloDePeliculas[i].nombre === this.value.nombre && arregloDePeliculas[i].horario === this.value.horario){
+      this.value.ticket = true;
+    }
+  }
+  
+  if (arregloConTutti.length > 0){
+    arregloConTutti.shift().ingresar(arregloDePeliculas,arregloConTutti)
+  }
+}
+
+
 
 /*⚠️ NO MODIFICAR NADA DEBAJO DE ESTA LINEA ⚠️*/
 module.exports = BinarySearchTree;
